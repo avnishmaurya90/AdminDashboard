@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+<mat-card class="mt-2 mr-2 ml-2 mb-2">
+  <mat-list>
+    <mat-list-item *ngFor="let notification of notifications">
+      <h6 matLine><b>{{notification.title}}</b></h6>
+      <p matLine>{{notification.body}}</p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>

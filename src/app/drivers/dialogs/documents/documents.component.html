@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="text-center">{{data.title | uppercase}} </h1>
+<div mat-dialog-content class="text-center">
+  <img class="img-responsive" [src]="data.url" height="400" width="450">
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+<div class="text-center" >
+  <button  mat-raised-button (click)="onNoClick()" cdkFocusInitial>Close</button>
+  <button class="text-center" mat-raised-button color="primary" (click)="download()"> Download</button>
+</div>

@@ -1,0 +1,16 @@
+<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" matTooltip="{{item.displayName}}"
+  [matTooltipPosition]="'right'" [matTooltipDisabled]="toolTipDisable" (click)="onItemSelected(item)">
+  <mat-icon *ngIf="!depth" class="routeIcon">{{item.iconName}}</mat-icon>&nbsp;&nbsp;
+  <span *ngIf="depth">{{item.displayName}}</span>
+  <span fxFlex *ngIf="item.children && item.children.length">
+    <span fxFlex></span>
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon>
+  </span>
+</a>
+
+<div *ngIf="expanded" class="submenu">
+  <app-nav-bar *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </app-nav-bar>
+</div>

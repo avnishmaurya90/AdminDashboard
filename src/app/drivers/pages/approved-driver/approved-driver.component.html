@@ -1,0 +1,80 @@
+<mat-card>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="drivers">
+      <ng-container matColumnDef="position">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let driver; let i = index;">
+          <span class="mobile-label">No.</span> {{i+1}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let driver">
+          <span class="mobile-label">Name</span> {{driver.firstName | uppercase}} {{driver.lastName | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="addedDate">
+        <mat-header-cell *matHeaderCellDef>Date of SignUp </mat-header-cell>
+        <mat-cell *matCellDef="let driver">
+          <span class="mobile-label">Date of SignUp </span> {{driver.createdAt | date:'longDate'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="licence">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> Licence </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let driver">
+          <span class="mobile-label">Licence</span>
+          <mat-icon class="text-center clickable" *ngIf="driver?.vehicle?.docs?.drivingLicence;else other_content"
+            (click)="openDocDialog('Driving Licence',driver.vehicle.id, 'drivingLicence', driver.vehicle.docs.drivingLicence)">image_search</mat-icon>
+          <ng-template #other_content> N/A</ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rc">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> RC </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let driver">
+          <span class="mobile-label">RC</span>
+          <mat-icon class="text-center clickable" *ngIf="driver?.vehicle?.docs?.licence;else other_content" (click)="openDocDialog('RC',driver.vehicle.id, 'licence', driver.vehicle.docs.licence)">image_search</mat-icon>
+          <ng-template #other_content> N/A</ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="insurance">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> Insurance </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let driver">
+          <span class="mobile-label">Insurance</span>
+          <mat-icon class="text-center clickable" *ngIf="driver?.vehicle?.docs?.customPapers;else other_content"
+            (click)="openDocDialog('Insurance', driver.vehicle.id, 'customPapers', driver.vehicle.docs.customPapers)">image_search</mat-icon>
+          <ng-template #other_content> N/A</ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let driver">
+          <span class="mobile-label">Status</span> {{driver.status | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let driver">
+          <span class="mobile-label">Action</span>
+          <button mat-raised-button color='warn' (click)="commentDialog(driver)">Suspend</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>>
+
+    </mat-table>
+    <div *ngIf="drivers && !drivers.length" class="text-center">No records found</div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+
+  </div>
+
+</mat-card>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

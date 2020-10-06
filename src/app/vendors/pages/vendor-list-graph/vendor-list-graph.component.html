@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="checkBoxFormat">
+    <mat-checkbox class="checkBoxMargin" [disabled]="true" [(ngModel)]="all">All</mat-checkbox>
+    <mat-checkbox class="checkBoxMargin" [(ngModel)]="isNotSuspended" (change)="vendorList()">Verified</mat-checkbox>
+    <mat-checkbox class="checkBoxMargin" [(ngModel)]="isSuspended" (change)="vendorList()">Unverified</mat-checkbox>
+    <mat-checkbox class="checkBoxMargin" [(ngModel)]="isOpen" (change)="vendorList()">Open</mat-checkbox>
+    <mat-checkbox class="checkBoxMargin" [(ngModel)]="isClosed" (change)="vendorList()">Closed</mat-checkbox>
+  </div>
+  <div class="container">
+    <agm-map #map [style.height.px]="height" #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="true"
+      [streetViewControl]="true" [disableDefaultUI]="false" [usePanning]="true" (mapClick)="mapClicked($event)">
+      <agm-marker *ngFor="let post of positions" (markerClick)="clickedMarker(post, i, infoWindow)" [latitude]="post.lat"
+        [longitude]="post.lng" [iconUrl]="post.icon" [opacity]="post.opacity" [markerDraggable]="post.draggable"
+        (dragEnd)="markerDragEnd(m, $event)">
+        <agm-info-window #infoWindow>{{markerInfo}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

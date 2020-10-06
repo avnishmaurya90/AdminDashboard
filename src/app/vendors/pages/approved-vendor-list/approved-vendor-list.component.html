@@ -1,0 +1,114 @@
+<div class="container">
+
+  <!-- <div class="row">
+        <div class="col-sm col-md col-ls col-xl">
+          <mat-form-field class="widthFit">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name" placeholder="Order ID">
+          </mat-form-field>
+        </div>
+        <div class="col-sm col-md col-ls col-xl">
+          <mat-form-field class="widthFit">
+            <mat-label>Type</mat-label>
+            <mat-select placeholder="Payment Type" [(ngModel)]="type">
+              <mat-option value="F&B">F&B</mat-option>
+              <mat-option value="Non F&B">Non F&B</mat-option>
+              <mat-option value="eCommerce">eCommerce</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm col-md col-ls col-xl">
+          <mat-form-field class="widthFit">
+            <app-city-form (cityEvent)="onCitySelected($event)"></app-city-form>
+          </mat-form-field>
+        </div>
+      </div> -->
+  <mat-card>
+
+    <div class="example-container mat-elevation-z8">
+      <mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+
+      <mat-table #table [dataSource]="vendors">
+
+        <ng-container matColumnDef="position">
+          <mat-header-cell class="customWidthClass" *matHeaderCellDef> No. </mat-header-cell>
+          <mat-cell class="customWidthClass" *matCellDef="let vendor; let i = index;">
+            <span class="mobile-label">No.</span> {{i+1}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Name</span> {{vendor.name | uppercase}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">City</span> {{vendor?.city?.name}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Category</span> {{vendor?.category?.name}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Email</span> {{vendor.email}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="mobile">
+          <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Phone</span> {{vendor.mobile}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="addedDate">
+          <mat-header-cell *matHeaderCellDef>Date of SignUp </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Date of SignUp </span> {{vendor.createdAt | date:'longDate'}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dutyStatus">
+          <mat-header-cell *matHeaderCellDef> Duty Status </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Duty Status</span> {{vendor.dutyStatus | uppercase}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <span class="mobile-label">Status </span> {{vendor.status | uppercase}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let vendor">
+            <button mat-raised-button color='warn' (click)="commentDialog(vendor)">Suspend</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
+
+      </mat-table>
+
+      <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+        (page)="handlePage($event)"></mat-paginator>
+
+    </div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,31 @@
+.marginTop {
+  margin-top: 2%;
+}
+
+.mapHeight {
+  height: 300px !important;
+}
+
+.tabSize {
+  height: 48px;
+  padding: 0 24px;
+  cursor: pointer;
+  box-sizing: border-box;
+  opacity: .6;
+  min-width: 100px !important;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
+}
+
+.mat-tab-label {
+  width: 50%;
+}
+
+.back {
+  background-color: #3f51b5;
+  color: white !important;
+}

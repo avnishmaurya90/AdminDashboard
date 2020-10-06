@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row marginTop">
+
+    <div class="col-sm col-md col-lg col-xl">
+      <mat-card class="back">Total Vendors: {{ stats ? stats.total: 'NA'}} </mat-card>
+    </div>
+
+    <div class="col-sm col-md col-lg col-xl">
+      <mat-card class="back">Open Vendors: {{stats ? stats.open: 'NA'}}</mat-card>
+    </div>
+
+    <div class="col-sm col-md col-lg col-xl">
+      <mat-card class="back">Close Vendors: {{stats ? stats.close: 'NA'}}</mat-card>
+    </div>
+
+    <div class="col-sm col-md col-lg col-xl">
+      <mat-card class="back">Verified Vendors: {{stats ? stats.verified : 'NA'}} </mat-card>
+    </div>
+
+    <div class="col-sm col-md col-lg col-xl">
+      <mat-card class="back">Unverified Vendors: {{stats ? stats.unverified: 'NA'}}</mat-card>
+    </div>
+
+  </div>
+  <mat-card>
+    <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+      <mat-tab label="Graph">
+        <app-vendor-list-graph *ngIf="tabIndex === 0"></app-vendor-list-graph>
+      </mat-tab>
+      <mat-tab label="List">
+        <app-vendor-list *ngIf="tabIndex === 1"> </app-vendor-list>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+
+</div>

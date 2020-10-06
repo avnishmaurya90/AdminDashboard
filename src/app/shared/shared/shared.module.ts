@@ -1,0 +1,111 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { CityFormComponent } from '../forms/city-form/city-form.component';
+import { VendorFormsComponent } from '../forms/vendor-forms/vendor-forms.component';
+import { FandbFareFormComponent } from '../forms/fandb-fare-form/fandb-fare-form.component';
+import { NonFandBFareFormComponent } from '../forms/non-fand-b-fare-form/non-fand-b-fare-form.component';
+
+import {
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
+  MatIconModule,
+  MatCardModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatTabsModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatMenuModule,
+  MatExpansionModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatStepperModule,
+  MatCheckboxModule,
+  MatTooltipModule,
+  MatRadioModule,
+  MatAutocompleteModule,
+} from '@angular/material';
+
+@NgModule({
+  declarations: [
+    CityFormComponent,
+    VendorFormsComponent,
+    FandbFareFormComponent,
+    NonFandBFareFormComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    AngularFireDatabaseModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatStepperModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatRadioModule,
+    MatAutocompleteModule
+  ],
+  exports: [
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    AngularFireDatabaseModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatCardModule,
+    MatStepperModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    FormsModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    CityFormComponent,
+    VendorFormsComponent,
+    FandbFareFormComponent,
+    NonFandBFareFormComponent,
+  ]
+})
+export class SharedModule { }

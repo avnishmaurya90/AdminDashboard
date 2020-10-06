@@ -1,0 +1,35 @@
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Base Price</mat-label>
+    <input matInput placeholder="Base Price" required [(ngModel)]="fandB.bonusPrice" min="0" max="50" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Bonus Limit</mat-label>
+    <input matInput placeholder="Bonus Limit" required [(ngModel)]="fandB.bonusLimit" min="0" max="15" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Bonus Price</mat-label>
+    <input matInput placeholder="Bonus Price" required [(ngModel)]="fandB.basePrice" min="0" max="50" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Base Distance</mat-label>
+    <input matInput placeholder="Base Distance" required [(ngModel)]="fandB.baseDistance" min="0" max="5" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Fare/KM</mat-label>
+    <input matInput placeholder="Fare/KM" required [(ngModel)]="fandB.perKilometerFare" (ngModelChange)="onFandBSelection()"
+      type="number">
+  </mat-form-field>
+</div>

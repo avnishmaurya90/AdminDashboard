@@ -1,0 +1,58 @@
+<mat-card class="driverList driverInvoice">
+  <div class="example-container mat-elevation-z8">
+    <div class="driver-title row">
+      <div class="col s12 m4 l4">
+        <h4>All Driver Invoices ({{total}})</h4>
+      </div>
+      <div class="col s12 m8 l8">
+        <div class="right">
+          <div class="search-box left">
+            <form>
+              <i class="material-icons">search</i>
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Invoice Number" aria-label="Number" matInput [formControl]="searchInvoiceCode"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Invoice Number</th>
+          <th>Invoice Date</th>
+          <th>Driver Name</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices; let i = index">
+          <td> {{i+1 + (pageSize*pageIndex)}} </td>
+          <td> {{invoice.code}} </td>
+          <td>{{invoice.createdAt | date: 'shortDate'}} </td>
+          <td>{{invoice.order.driver.name}}</td>
+          <td>₹ {{invoice.totalAmount}}</td>
+          <td class="statusDriver">
+            <ul>
+              <li class="download-text"><a><i class="material-icons">get_app</i> Download </a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <mat-card *ngIf="!isLoading && !invoices.length">
+    <p class="text-center">No Record Found</p>
+  </mat-card>
+  <div class="pagination pagination-driver">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+  </div>
+</mat-card>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

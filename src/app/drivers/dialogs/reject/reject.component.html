@@ -1,0 +1,13 @@
+<h1 mat-dialog-title class="text-center">{{data.firstName | uppercase}}&nbsp;{{data.lastName | uppercase}}</h1>
+<div mat-dialog-content class="text-center">
+  <p>Write reason of rejection/suspension</p>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="data.comments"></textarea>
+  </mat-form-field>
+</div>
+<div class="text-center">
+  <button mat-raised-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button *ngIf="data.comments" class="text-center" mat-raised-button color="primary" [mat-dialog-close]="data">Submit</button>
+  <button *ngIf="!data.comments" class="text-center" disabled mat-raised-button color="primary" [ngClass]="data.comments"
+    [mat-dialog-close]="data">Submit</button>
+</div>

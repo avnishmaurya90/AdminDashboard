@@ -1,0 +1,18 @@
+<mat-sidenav-container *ngIf="showSideNav;else other_content" class="customSidebar">
+  <mat-sidenav #sidenav class="side-nav-style side_main" mode="side" opened role="navigation">
+    <div class="top-menuicon">
+      <mat-icon *ngIf="!openMenu && showNavMenu" (click)="open()">menu</mat-icon>
+      <mat-icon *ngIf="openMenu && showNavMenu" (click)="close()">menu</mat-icon>
+    </div>
+    <mat-nav-list class="menu_list">
+      <app-nav-bar *ngFor="let item of navItems" [item]="item"></app-nav-bar>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header class="main-header"></app-header>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<ng-template #other_content>
+  <router-outlet></router-outlet>
+</ng-template>

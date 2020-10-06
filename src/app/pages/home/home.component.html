@@ -1,0 +1,44 @@
+<div class="dashBoardMain">
+  <div class="row marginTop">
+    <div class="col s12 m12 l12">
+      <h1>Welcome to Pickji Admin</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
+    </div>
+  </div>
+    <div class="row marginTop">
+    <div class="col s12 m6 l3">
+      <label>Order</label>
+      <mat-card>
+        <canvas id="orderChart" width="40" height="40"></canvas>
+      </mat-card>
+    </div>
+    <div class="col s12 m6 l3">
+      <label>Drivers</label>
+      <mat-card>
+        <canvas id="driverChart" width="40" height="40"></canvas>
+      </mat-card>
+    </div>
+    <div class="col s12 m6 l3">
+      <label>Vendors</label>
+      <mat-card>
+        <canvas id="vendorChart" width="40" height="40"></canvas>
+      </mat-card>
+    </div>
+    <div class="col s12 m6 l3">
+      <label> Resources</label>
+      <mat-card>
+        <canvas id="resourceChart" width="40" height="40"></canvas>
+      </mat-card>
+    </div>
+
+  </div>
+<div class="mapView marginTop row">
+    <div class="col s12 m12 l12">
+        <label> Resources</label>
+        <app-map [height]="550"></app-map>
+    </div>
+</div>
+  
+
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

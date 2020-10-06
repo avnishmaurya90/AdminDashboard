@@ -1,0 +1,67 @@
+<div class="driverDetailPopup">
+  <h4>Driver Profile</h4>
+  <div class="row">
+    <div class="col s12 m6 l4">
+      <label>Driver Image</label>
+      <div class="driverImage">
+        <img *ngIf="!data?.driver?.pic?.url" src="assets/images/dummyface.png">
+        <img *ngIf="data?.driver?.pic?.url" src="{{data.driver.pic.url}}">
+      </div>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>Driver Name </label>
+      <h5>{{data.driver.firstName | uppercase}} {{data.driver.lastName | uppercase}} </h5>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>Email</label>
+      <h5>{{data.driver.email}}</h5>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>Contact Number</label>
+      <h5>{{data.driver.mobile}}</h5>
+    </div>
+    <div class="col s12 m6 l4 select-status">
+      <label>Status</label>
+      <select *ngIf="data.isUpdate" matNativeControl required [(ngModel)]="status" (change)="commentDialog(data.driver)">
+        <option value="inactive" disabled>In Active</option>
+        <option value="active">Active</option>
+        <option value="suspended" [disabled]="data.driver.status === 'inactive' || data.driver.isSuspended">Suspended</option>
+        <option value="rejected" [disabled]="data.driver.status === 'active' || data.driver.isRejected">Rejected</option>
+      </select>
+      <h5 *ngIf="!data.isUpdate">{{status | uppercase}}</h5>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>Signup Date</label>
+      <h5>{{data.driver.createdAt | date: 'shortDate'}}</h5>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>License</label>
+      <div *ngIf="data.driver && data.driver.vehicle && data.driver.vehicle.docs && data.driver.vehicle.docs.licence"
+        class="driverLicense">
+        <img src="{{data.driver.vehicle.docs.licence}}" height="100" width="342">
+      </div>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>Insurance</label>
+      <div *ngIf="data.driver && data.driver.vehicle && data.driver.vehicle.docs && data.driver.vehicle.docs.drivingLicence"
+        class="driverLicense">
+        <img src="{{data.driver.vehicle.docs.drivingLicence}}" height="100" width="342">
+      </div>
+    </div>
+    <div class="col s12 m6 l4">
+      <label>RC</label>
+      <div *ngIf="data.driver && data.driver.vehicle && data.driver.vehicle.docs && data.driver.vehicle.docs.customPapers"
+        class="driverLicense">
+        <img src="{{data.driver.vehicle.docs.customPapers}}" height="100" width="342">
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="data.isUpdate" class="driverpopupFooter">
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="onSave(data.driver)">Save</button>
+      <button mat-button color="primary" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>
+
+</div>

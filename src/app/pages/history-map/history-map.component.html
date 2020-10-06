@@ -1,0 +1,21 @@
+<mat-card>
+  <agm-map #map [style.height.px]="height" #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="true"
+    [streetViewControl]="true" [disableDefaultUI]="false" [usePanning]="true" (mapClick)="mapClicked($event)">
+
+    <ng-container>
+      <agm-circle *ngFor="let circle of positions" [latitude]="circle.lat" [fillColor]="'red'" [longitude]="circle.lng"
+        [fillOpacity]="0.4" [radius]="0.4"></agm-circle>
+      <agm-polyline [strokeColor]="'red'" [strokeWeight]="weight">
+        <agm-polyline-point *ngFor="let post of positions" [latitude]="post.lat" [longitude]="post.lng">
+        </agm-polyline-point>
+      </agm-polyline>
+    </ng-container>
+
+    <ng-container *ngIf="showMarker">
+      <agm-marker (markerClick)="clickedMarker(markerDetail, i, infoWindow)" [latitude]="markerDetail.lat" [longitude]="markerDetail.lng"
+        [iconUrl]="markerDetail.icon" (dragEnd)="markerDragEnd(markerDetail, $event)">
+        <agm-info-window #infoWindow [latitude]="markerDetail.lat" [longitude]="markerDetail.lng">{{markerInfo}}</agm-info-window>
+      </agm-marker>
+    </ng-container>
+  </agm-map>
+</mat-card>

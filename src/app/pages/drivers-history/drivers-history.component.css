@@ -1,0 +1,20 @@
+.widthFit {
+  width: 85% !important;
+}
+
+.widthFitDate {
+  width: 80% !important;
+}
+
+.sliderStyle {
+  min-width: 200px !important;
+  margin-left: 10px;
+}
+
+.matHeight {
+  height: 285px;
+}
+
+.heightFix {
+  height: 270px;
+}

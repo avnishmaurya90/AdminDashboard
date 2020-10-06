@@ -1,0 +1,92 @@
+<div class="container mt-4">
+  <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <p>General Info</p>
+        <hr>
+        <div class="form-group">
+          <input type="text" formControlName="info" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.info.errors }" />
+          <div *ngIf="submitted && f.info.errors" class="invalid-feedback">
+            <div *ngIf="f.info.errors.required">info Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Site Logo:</label>
+          <input type="file" #file (change)="onFileAdded($event)" />
+          <span class="border">
+            <img class="border" height="70" width="70" alt="logo" src="{{logo}}">
+          </span>
+          <input type="text" disabled formControlName="logoUrl" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.logoUrl.errors }" />
+          <div *ngIf="submitted && f.logoUrl.errors" class="invalid-feedback">
+            <div *ngIf="f.logoUrl.errors.required">logo is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <p>SEO Content</p>
+        <hr>
+        <div class="form-group">
+          <label>Meta Tag</label>
+          <input type="text" formControlName="field1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field1.errors }" />
+          <div *ngIf="submitted && f.field1.errors" class="invalid-feedback">
+            <div *ngIf="f.field1.errors.required">Meta Field is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="field2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field2.errors }" />
+          <div *ngIf="submitted && f.field2.errors" class="invalid-feedback">
+            <div *ngIf="f.field2.errors.required">Meta Field is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="field3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.field3.errors }" />
+          <div *ngIf="submitted && f.field3.errors" class="invalid-feedback">
+            <div *ngIf="f.field3.errors.required">Meta Field is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <p>Social Links</p>
+        <hr>
+        <div class="form-group">
+          <label>Facebook:</label>
+          <input type="text" formControlName="facebook" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" />
+          <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
+            <div *ngIf="f.facebook.errors.required">facebook is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Linkedin:</label>
+          <input type="text" formControlName="linkedin" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.linkedin.errors }" />
+          <div *ngIf="submitted && f.linkedin.errors" class="invalid-feedback">
+            <div *ngIf="f.linkedin.errors.required">linkedin is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Twitter:</label>
+          <input type="twitter" formControlName="twitter" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.twitter.errors }" />
+          <div *ngIf="submitted && f.twitter.errors" class="invalid-feedback">
+            <div *ngIf="f.twitter.errors.required">twitter is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <p>Google Analytics Code</p>
+        <hr>
+        <div class="form-group">
+          <input type="twitter" formControlName="googleAnalytics" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.twitter.errors }" />
+          <div *ngIf="submitted && f.googleAnalytics.errors" class="invalid-feedback">
+            <div *ngIf="f.googleAnalytics.errors.required">twitter is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button mat-raised-button color="primary" [disabled]="isLoading">Submit</button>
+    </div>
+  </form>
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

@@ -1,0 +1,51 @@
+<mat-toolbar *ngIf="showHeader" color="primary">
+  <span class="title-left">{{headerText}}</span>
+  <div class="right-box">
+    <span *ngIf="user" class="align-right">
+      <mat-icon class="notification-bottom clickable" [matMenuTriggerFor]="notification">notifications</mat-icon>
+    </span>
+    <span *ngIf="user" class="align-right">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <img class="roundedImage" src="assets/male-icon.jpg" height="42" width="42">
+      </button>
+    </span>
+  </div>
+
+</mat-toolbar>
+<mat-menu class="matMenuStyle customemat" #menu="matMenu" [overlapTrigger]="false">
+  <div *ngIf="user" class="">
+    <ul>
+      <li><a href="javascript:void(0);"><i class="material-icons">settings</i>Settings</a></li>
+      <li><a href="javascript:void(0);"><i class="material-icons">lock</i>Change Password</a></li>
+      <li><a href="javascript:void(0);" (click)="logout()"><i class="material-icons">power_settings_new</i>Log Out</a></li>
+    </ul>
+  </div>
+</mat-menu>
+
+<mat-menu class="matMenuStyle" #notification="matMenu" [overlapTrigger]="false">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6"><span class="notifyHeader ml-2">Notifications</span></div>
+    <div *ngIf="notifications.length" class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+      <small class="read clickable" (click)="markRead()">Mark All As Read</small>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="!notifications.length">
+    <div class="text-center mr-2 ml-2 mt-4 mb-4">
+      No Unread Notifications
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div *ngIf="notifications.length" class="notificationList">
+    <div *ngFor="let notification of notifications">
+      <p class="ml-4">{{notification.title}}</p>
+      <p class="ml-4"><small>{{notification.body}}</small></p>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <div class="text-center mr-2">
+    <a class="themeColor" [routerLink]="['/notifications']">
+      See all
+    </a>
+  </div>
+</mat-menu>

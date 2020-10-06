@@ -1,0 +1,50 @@
+<div class="container mt-4">
+
+  <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label>Street</label>
+          <input type="text" formControlName="street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
+          <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+            <div *ngIf="f.street.errors.required">Street Name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+          <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>District</label>
+          <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.district.errors }" />
+          <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
+            <div *ngIf="f.district.errors.required">District is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+          <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors.required">State is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>PinCode</label>
+          <input type="pinCode" formControlName="pinCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }" />
+          <div *ngIf="submitted && f.pinCode.errors" class="invalid-feedback">
+            <div *ngIf="f.pinCode.errors.required">Pin code is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button mat-raised-button color="primary" [disabled]="isLoading">Submit</button>
+    </div>
+  </form>
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

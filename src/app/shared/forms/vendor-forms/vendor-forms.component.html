@@ -1,0 +1,8 @@
+<mat-form-field class="widthFit">
+  <mat-label>Vendor</mat-label>
+  <mat-select placeholder="Vendor" [(ngModel)]="vendor" (ngModelChange)="onVendorSelected($event)" required>
+    <mat-option *ngFor="let vendor of vendors" [value]="vendor">
+      {{vendor.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

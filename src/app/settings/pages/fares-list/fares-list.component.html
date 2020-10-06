@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="F&B">
+      <app-f-and-b-list *ngIf="tabIndex === 0"></app-f-and-b-list>
+    </mat-tab>
+    <mat-tab label="Non F&B">
+      <app-non-f-and-b-list *ngIf="tabIndex === 1"> </app-non-f-and-b-list>
+    </mat-tab>
+    <mat-tab label="eCommerce">
+      <app-e-commerce-list *ngIf="tabIndex === 2"> </app-e-commerce-list>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

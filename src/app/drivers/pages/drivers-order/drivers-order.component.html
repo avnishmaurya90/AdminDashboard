@@ -1,0 +1,125 @@
+<mat-card class="driverList">
+  <div class="example-container mat-elevation-z8">
+    <div class="driver-title row">
+      <div class="col s12 m4 l4">
+        <h4>All Driver Orders ({{total}})</h4>
+      </div>
+      <div class="col s12 m8 l8">
+        <div class="right">
+          <div class="search-box left">
+            <form>
+              <i class="material-icons">search</i>
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Order ID" aria-label="Number" matInput [formControl]="searchOrder"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                </mat-autocomplete>
+              </mat-form-field>
+
+            </form>
+          </div>
+
+          <button mat-icon-button (click)="showFilter=true" class="left custome-filter">
+            <mat-icon>filter_list</mat-icon>
+            Filter
+          </button>
+          <div *ngIf="showFilter" class="dropdown-area">
+            <div class="filter-title">
+              <h5 class="left">Filter</h5>
+              <i class="material-icons right" (click)="showFilter=false">clear</i>
+            </div>
+            <div class="form-content">
+              <mat-form-field>
+                <label>Id</label>
+                <input matInput [(ngModel)]="code" placeholder="Id">
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>Status</label>
+                <mat-select [(ngModel)]="status">
+                  <mat-option value="" selected></mat-option>
+                  <mat-option value="initiated">Initiated</mat-option>
+                  <mat-option value="assigned">Assigned</mat-option>
+                  <mat-option value="started">Started</mat-option>
+                  <mat-option value="delivered">Delivered</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="date-signup">
+                <label>Order Date</label>
+                <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="date" placeholder="Order Date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-radio-group [(ngModel)]="isCOD" class="list-approve">
+                <mat-radio-button value="true">COD</mat-radio-button>
+                <mat-radio-button value="false">Online</mat-radio-button>
+              </mat-radio-group>
+
+
+            </div>
+            <div class="footer-filter">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" (click)="orderList(); showFilter=false">Apply Filter</button>
+                <button mat-button color="primary" (click)="reset(); showFilter=false">Reset All</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+
+          <th>S. No</th>
+          <th>Order Id</th>
+          <th>Order Date/ Time</th>
+          <th>Driver Name</th>
+          <th>Payment Type</th>
+          <th>Order Status</th>
+          <th>Customer Name</th>
+          <th>Customer Mobile</th>
+          <td>Download</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders; let i=index;">
+          <td> {{i+1 + (pageSize*pageIndex)}} </td>
+          <td> {{order.code}} </td>
+          <td>{{order.createdAt | date:'short'}}</td>
+          <td>{{order.driver.name | uppercase}}</td>
+          <td *ngIf="order.isCOD" class="yellow-text2">COD</td>
+          <td *ngIf="!order.isCOD" class="blue-edtitext">Online</td>
+          <td>{{order?.status | uppercase}}</td>
+          <td>{{order?.receiver?.name | uppercase}}</td>
+          <td>{{order.receiver.mobile}} </td>
+
+          <td class="statusDriver">
+            <ul>
+              <li class="download-text"><a (click)="getPdf(order.code)"><i class="pdf-icon"></i> </a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <mat-card *ngIf="!isLoading && !orders.length">
+    <p class="text-center">No Record Found</p>
+  </mat-card>
+  <div class="pagination pagination-driver">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+  </div>
+</mat-card>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+
+
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

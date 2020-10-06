@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="Pending List">
+      <app-pending-driver *ngIf="tabIndex === 0"></app-pending-driver>
+    </mat-tab>
+    <mat-tab label="Approved List">
+      <app-approved-driver *ngIf="tabIndex === 1"> </app-approved-driver>
+    </mat-tab>
+    <mat-tab label="Rejected List">
+      <app-rejected-driver *ngIf="tabIndex === 2"> </app-rejected-driver>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

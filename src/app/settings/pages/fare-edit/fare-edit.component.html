@@ -1,0 +1,103 @@
+<mat-card class="mt-2 ml-2 mr-2">
+  <div class="row">
+    <mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+    <mat-card class="mt-2 ml-2 mr-2 widthFit">
+      <form *ngIf="isFare">
+        <div class="row">
+          <mat-form-field class="widthFit">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" [disabled]="true" required [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="fare.city.name">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="widthFit">
+            <mat-label>Vendor</mat-label>
+            <input matInput placeholder="Vendor" [disabled]="true" required [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="fare.vendor.name">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="widthFit">
+            <mat-label>Type</mat-label>
+            <input matInput placeholder="Type" [disabled]="true" required [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="fare.type">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Base Price</mat-label>
+            <input matInput placeholder="Base Price" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.basePrice"
+              min="0" max="50" type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Bonus Limit</mat-label>
+            <input matInput placeholder="Bonus Limit" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.bonusLimit"
+              min="0" max="15" type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Bonus Price</mat-label>
+            <input matInput placeholder="Bonus Price" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.bonusPrice"
+              min="0" max="50" type="number">
+          </mat-form-field>
+
+        </div>
+        <div class="row" *ngIf="isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Base Distance</mat-label>
+            <input matInput placeholder="Base Distance" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.baseDistance"
+              min="0" max="5" type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Fare/KM</mat-label>
+            <input matInput placeholder="Fare/KM" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.perKilometerFare"
+              type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="!isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Base Price</mat-label>
+            <input matInput placeholder="Base Price" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.basePercentPrice"
+              type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="!isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Bonus Limit</mat-label>
+            <input matInput placeholder="Bonus Limit" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.basePercent"
+              type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="!isFAndB">
+          <mat-form-field class="widthFit">
+            <mat-label>Bonus Price</mat-label>
+            <input matInput placeholder="Bonus Price" required [ngModelOptions]="{standalone: true}" [(ngModel)]="fare.bonusPercentPrice"
+              type="number">
+          </mat-form-field>
+        </div>
+
+        <div class="text-center">
+          <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>&nbsp;&nbsp;
+          <button mat-raised-button color="warning" (click)="gotoFareList()">Cancel</button>
+        </div>
+      </form>
+    </mat-card>
+
+  </div>
+
+</mat-card>

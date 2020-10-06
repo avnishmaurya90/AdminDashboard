@@ -1,0 +1,9 @@
+.footer {
+  bottom: 0;
+  position: absolute;
+}
+
+.copyright {
+  flex: 1 1 auto;
+  text-align: right;
+}

@@ -1,0 +1,201 @@
+<mat-card class="mt-2 ml-2 mr-2 mb-2">
+  <form>
+    <mat-form-field class="widthFit">
+      <mat-select placeholder="Select Driver" [(ngModel)]="selectedDriver" name="selectedValue">
+        <mat-option *ngFor="let driver of drivers" [value]="driver">
+          {{driver.firstName |uppercase}} {{driver.lastName |uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="widthFitDate">
+      <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="date" name="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary" (click)="getLocationHistory()">Submit</button>
+</mat-card>
+
+
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+<div class="heightFix">
+
+  <mat-card *ngIf="message" class="mt-2 ml-2 mr-2">
+    <h6>Time Slots :</h6>
+    <p>{{message}}</p>
+  </mat-card>
+  <mat-card *ngIf="isHistory" class="mt-2 ml-2 mr-2">
+    <h6>Time Slots :</h6>
+
+    <div class="row mt-2" *ngIf="oneHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">0-1 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(oneHourList, 1)">directions_bike</mat-icon>
+      <div *ngIf="hour==1">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, oneHourList)"></mat-slider>
+      </div>
+    </div>
+
+    <div class="row mt-2" *ngIf="twoHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">1-2 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twoHourList, 2)">directions_bike</mat-icon>
+      <div *ngIf="hour===2">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twoHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="threeHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">2-3 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(threeHourList, 3)">directions_bike</mat-icon>
+      <div *ngIf="hour===3">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, threeHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="fourHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">3-4 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(fourHourList, 4)">directions_bike</mat-icon>
+      <div *ngIf="hour===4">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, fourHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="fiveHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">4-5 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(fiveHourList, 5)">directions_bike</mat-icon>
+      <div *ngIf="hour===5">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, fiveHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="sixHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">5-6 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(sixHourList, 6)">directions_bike</mat-icon>
+      <div *ngIf="hour===6">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, sixHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="sevenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">6-7 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(sevenHourList,7)">directions_bike</mat-icon>
+      <div *ngIf="hour===7">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, sevenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="eightHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">7-8 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(eightHourList, 8)">directions_bike</mat-icon>
+      <div *ngIf="hour===8">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, eightHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="nineHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">8-9 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(nineHourList, 9)">directions_bike</mat-icon>
+      <div *ngIf="hour===9">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, nineHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="tenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">9-10 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(tenHourList,10)">directions_bike</mat-icon>
+      <div *ngIf="hour===10">
+        <mat-slider *ngIf="hour===10" class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval"
+          (input)="showMarkerDetails($event, tenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="elevenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">10-11 AM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(elevenHourList, 11)">directions_bike</mat-icon>
+      <div *ngIf="hour===11">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, elevenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twelveHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">11-12 Noon :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twelveHourList, 12)">directions_bike</mat-icon>
+      <div *ngIf="hour===12">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twelveHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="thirteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">12-1 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(thirteenHourList, 13)">directions_bike</mat-icon>
+      <div *ngIf="hour===13">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, thirteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="fourteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">1-2 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(fourteenHourList, 14)">directions_bike</mat-icon>
+      <div *ngIf="hour===14">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, fourteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="fifteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">2-3 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(fifteenHourList, 15)">directions_bike</mat-icon>
+      <div *ngIf="hour===15">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, fifteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="sixteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">3-4 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(sixteenHourList, 16)">directions_bike</mat-icon>
+      <div *ngIf="hour===16">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, sixteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="seventeenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">4-5 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(seventeenHourList, 17)">directions_bike</mat-icon>
+      <div *ngIf="hour===17">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, seventeenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="eighteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">5-6 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(eighteenHourList, 18)">directions_bike</mat-icon>
+      <div *ngIf="hour===18">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, eighteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="nineteenHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">6-7 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(nineteenHourList,19)">directions_bike</mat-icon>
+      <div *ngIf="hour===19">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, nineteenHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twentyHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">7-8 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twentyHourList,20)">directions_bike</mat-icon>
+      <div *ngIf="hour===20">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twentyHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twentyOneHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">8-9 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twentyOneHourList, 21)">directions_bike</mat-icon>
+      <div *ngIf="hour===21">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twentyOneHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twentyTwoHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">9-10 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twentyTwoHourList, 22)">directions_bike</mat-icon>
+      <div *ngIf="hour===22">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twentyTwoHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twentyThreeHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">10-11 PM :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twentyThreeHourList, 23)">directions_bike</mat-icon>
+      <div *ngIf="hour===23">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twentyThreeHourList)"></mat-slider>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="twentyFourHourList.length">
+      <p class="col-sm-8 col-md-8 col-lg-8 col-xl-8">11-12 Midnight :</p>
+      <mat-icon class="col-sm-4 col-md-4 col-lg-4 col-xl-4 clickable" (click)="onInputChange(twentyFourHourList,24)">directions_bike</mat-icon>
+      <div *ngIf="hour===24">
+        <mat-slider class="sliderStyle" [max]="endLocation" [min]="0" [step]="1" [tickInterval]="tickInterval" (input)="showMarkerDetails($event, twentyFourHourList)"></mat-slider>
+      </div>
+    </div>
+  </mat-card>
+</div>

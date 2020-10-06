@@ -1,0 +1,148 @@
+<mat-card class="driverList">
+  <div class="example-container mat-elevation-z8">
+
+    <div class="driver-title row">
+      <div class="col s12 m4 l4">
+        <h4>All Drivers ({{total}})</h4>
+      </div>
+      <div class="col s12 m8 l8">
+        <div class="right">
+          <div class="search-box left">
+            <form>
+              <i class="material-icons">search</i>
+              <!-- <mat-form-field class="example-full-width">
+                <input matInput placeholder="Phone Number">
+              </mat-form-field> -->
+
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Phone Number" aria-label="Number" matInput [formControl]="searchMobile"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+          <button mat-icon-button (click)="showFilter=true" class="left custome-filter">
+            <mat-icon>filter_list</mat-icon>
+            Filter
+          </button>
+          <div *ngIf="showFilter" class="dropdown-area">
+            <div class="filter-title">
+              <h5 class="left">Filter</h5>
+              <i class="material-icons right" (click)="showFilter=false">clear</i>
+            </div>
+            <div class="form-content">
+              <mat-form-field>
+                <label>Id</label>
+                <input matInput [(ngModel)]="code" placeholder="Id">
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>Driver Name</label>
+                <input matInput [(ngModel)]="name" placeholder="Driver Name">
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>Email</label>
+                <input matInput [(ngModel)]="email" placeholder="Email">
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>Phone</label>
+                <input matInput [(ngModel)]="mobile" placeholder="Phone">
+              </mat-form-field>
+
+              <mat-form-field class="date-signup">
+                <label>Date Of Signup</label>
+                <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="date" placeholder="Date Of Signup">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+              <section class="list-approve">
+                <mat-radio-button [(ngModel)]="isActive">Approved</mat-radio-button>
+                <mat-radio-button [(ngModel)]="isRejected">Rejected</mat-radio-button>
+                <mat-radio-button [(ngModel)]="isSuspended">Suspended</mat-radio-button>
+                <mat-radio-button [(ngModel)]="isInactive">InActive</mat-radio-button>
+              </section>
+            </div>
+            <div class="footer-filter">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" (click)="driverList(); showFilter=false">Apply Filter</button>
+                <button mat-button color="primary" (click)="reset(); showFilter=false">Reset All</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>S. No</th>
+          <th>Id</th>
+          <th>Driver Name</th>
+          <th>SignUp Date</th>
+          <th>Phone Number</th>
+          <th>RC</th>
+          <th>License</th>
+          <th>Insurance</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of drivers;let i = index">
+          <td> {{i+1 + (pageSize*pageIndex)}} </td>
+          <td>{{driver.code | uppercase}}</td>
+          <td>
+            <div class="driver-img">
+              <span>
+                <img *ngIf=" !driver.pic || !driver?.pic?.url" src="assets/images/dummyface.png">
+                <img *ngIf=" driver.pic && driver.pic.url" src="{{driver.pic.url}}" onError="this.src='assets/images/dummyface.png'"
+                  height="42" width="42">
+              </span>
+              {{driver.firstName | uppercase}} {{driver.lastName | uppercase}}
+            </div>
+          </td>
+          <td>{{driver.createdAt | date:'shortDate'}}</td>
+          <td>{{driver.mobile}}</td>
+          <td *ngIf="!driver.vehicle || !driver.vehicle.docs || !driver.vehicle.docs.licence" class="download-text">Pending</td>
+          <td *ngIf="driver.vehicle  && driver.vehicle.docs &&  driver.vehicle.docs.licence" class="download-text"><a
+              href="{{driver.vehicle.docs.licence}}" download>Download</a></td>
+          <td *ngIf="!driver.vehicle || !driver.vehicle.docs || !driver.vehicle.docs.drivingLicence" class="download-text">Pending</td>
+          <td *ngIf=" driver.vehicle  && driver.vehicle.docs &&driver.vehicle.docs.drivingLicence" class="download-text"><a
+              href="{{driver.vehicle.docs.drivingLicence}}" download>Download</a></td>
+          <td *ngIf="!driver.vehicle || !driver.vehicle.docs || !driver.vehicle.docs.customPapers" class="download-text">Pending</td>
+          <td *ngIf="driver.vehicle  && driver.vehicle.docs && driver.vehicle.docs.customPapers" class="download-text"><a
+              href="{{driver.vehicle.docs.customPapers}}" download>Download</a></td>
+          <td class="statusDriver">
+            <ul>
+              <li *ngIf="driver.status ==='inactive' && !driver.isRejected" class="reject-text"><a><i class="material-icons">lens</i>InActive</a></li>
+              <li *ngIf="driver.status ==='active' && !driver.isSuspended" class="approve-text"><a><i class="material-icons">lens</i>Active</a></li>
+              <li *ngIf="driver.isSuspended" class="reject-text"><a><i class="material-icons">lens</i>Suspended</a></li>
+              <li *ngIf="driver.isRejected" class="reject-text"><a><i class="material-icons">lens</i>Rejected</a></li>
+            </ul>
+          </td>git
+          <td class="action-td">
+            <ul>
+              <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li>
+              <li><a (click)="viewDetail(driver, false)"><i class="material-icons blue-edtitext">remove_red_eye</i></a></li>
+              <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+  <mat-card *ngIf="!isLoading && !drivers.length">
+    <p class="text-center">No Record Found</p>
+  </mat-card>
+  <div class="pagination pagination-driver">
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+  </div>
+</mat-card>
+
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

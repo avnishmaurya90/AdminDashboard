@@ -1,0 +1,38 @@
+<mat-card class="mt-2 ml-2 mr-2 mb-2">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [completed]="isCitySelected">
+      <ng-template matStepLabel>Select City</ng-template>
+      <mat-card class="mt-2">
+        <app-city-form (cityEvent)="onCitySelected($event, stepper)"></app-city-form>
+        <div class="nextButton">
+          <button mat-raised-button *ngIf="city && city.id" color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-card>
+    </mat-step>
+    <mat-step [completed]="isVendorSelected">
+      <ng-template matStepLabel>Select Vendor</ng-template>
+      <mat-card class="mt-2">
+        <app-vendor-forms [query]="vendorQuery" (vendorEvent)="onVendorSelected($event, stepper)"></app-vendor-forms>
+        <div class="nextButton">
+          <button mat-raised-button color="primary" *ngIf="vendor && vendor.id" matStepperNext>Next</button>
+        </div>
+      </mat-card>
+    </mat-step>
+    <mat-step [completed]="isFormSubmission">
+      <ng-template matStepLabel>Fill Price Details</ng-template>
+      <mat-card *ngIf="vendor?.type === 'F&B' || vendor?.type === 'Non F&B'" class="mt-2">
+        <app-fandb-fare-form [type]="vendor.type" (fandBEvent)="onFareSelected($event)"></app-fandb-fare-form>
+        <div class="nextButton">
+          <button mat-raised-button color="primary" (click)="submit(stepper)">Submit</button>&nbsp;&nbsp;
+        </div>
+      </mat-card>
+      <mat-card *ngIf="vendor?.type === 'eCommerce'" class="mt-2">
+        <app-non-fand-b-fare-form [type]="vendor.type" (nonFandBEvent)="onFareSelected($event)"></app-non-fand-b-fare-form>
+        <div class="nextButton">
+          <button mat-raised-button color="primary" (click)="submit(stepper)">Submit</button>&nbsp;&nbsp;
+        </div>
+      </mat-card>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

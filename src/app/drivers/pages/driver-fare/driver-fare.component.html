@@ -1,0 +1,348 @@
+<mat-card class="driverList driverInvoice createFarewrap">
+    <div class="example-container mat-elevation-z8">
+       <div class="driver-title row">
+          <div class="col s12 m4 l4">
+             <h4>All Vendor (200)</h4>
+          </div>
+          <div class="col s12 m8 l8">
+             <div class="right">
+                <button mat-icon-button   class="left custome-filter createFareBtn"><a [routerLink]="['/drivers/createfare']">
+                    Create Fare</a>
+                   </button>
+                <div class="search-box left">
+                   <form>
+                      <i class="material-icons">search</i>
+                      <mat-form-field class="example-full-width">
+                         <input matInput placeholder="Vendor Name">
+                      </mat-form-field>
+                   </form>
+                </div>
+ 
+                <button mat-icon-button (click)="showFilter=true" class="left custome-filter">
+                    <mat-icon>filter_list</mat-icon>
+                    Filter
+                  </button>
+                <div *ngIf="showFilter" class="dropdown-area farefilter">
+                   <div class="filter-title">
+                      <h5 class="left">Filter</h5>
+                      <i class="material-icons right" (click)="showFilter=false">clear</i>
+                   </div>
+                   <div class="form-content">
+
+                        <mat-form-field  >
+                              <label>Select City</label>
+                              <mat-form-field>
+                                  <mat-select  >
+                                    <mat-option value="volvo">Volvo</mat-option>
+                                    <mat-option value="saab">Saab</mat-option>
+                                    <mat-option value="mercedes">Mercedes</mat-option>
+                                    <mat-option value="audi">Audi</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                            </mat-form-field>
+ 
+                            <mat-form-field>
+                                 <label>Vendor Name</label>
+                                 <input matInput placeholder="Id">
+                              </mat-form-field>
+                            <div class="list-approve  ">
+                              <label>&nbsp;</label>
+                              <mat-radio-group >                  
+                                <mat-radio-button value="1">Single Order</mat-radio-button>
+                                <mat-radio-button value="2">Bulk Order</mat-radio-button>
+                              </mat-radio-group>
+                            </div>
+                     <div class="row">
+                        <mat-form-field class="col s12 m6 l6">
+                           <label>Vendor Type</label>
+                           <input matInput placeholder="Id">
+                        </mat-form-field>
+                        <mat-form-field class="col s12 m6 l6">
+                           <label>Base Price</label>
+                           <input matInput placeholder="Driver Name">
+                        </mat-form-field>
+                     </div>  
+                      <div class="row">
+                         <mat-form-field class="col s12 m6 l6">
+                            <label>Bonus Limit</label>
+                            <input matInput placeholder="Email">
+                         </mat-form-field>
+                         <mat-form-field class="col s12 m6 l6">
+                            <label>Bonus Price</label>
+                            <input matInput placeholder="Phone">
+                         </mat-form-field>
+
+                      </div>
+                      <div class="row">
+                      <mat-form-field class="col s12 m6 l6">
+                           <label>Base Distance</label>
+                           <input matInput placeholder="Phone">
+                        </mat-form-field>
+                      <mat-form-field class="col s12 m6 l6">
+                           <label>Fare/Km</label>
+                           <input matInput placeholder="Phone">
+                        </mat-form-field>
+                     </div>
+                     </div>
+                   <div class="footer-filter">
+                      <div class="example-button-row">
+                         <button mat-raised-button color="primary">Apply Filter</button>
+                         <button mat-button color="primary">Reset All</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <table>
+          <thead>
+             <tr>
+                <th>S.No</th>
+                <th>City</th>
+                <th>Vendor</th>
+                <th>Vendor Type</th>
+                <th>Base Price</th>
+                <th>Bonus Limit</th>
+                <th>Bonus Price</th>             
+                <th>Base Distance</th>
+                <th>Fare/Km</th>
+                <th>Action</th>
+             </tr>
+          </thead>
+          <tbody>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+             <tr>
+                <td>1</td>
+                <td> Kolkata </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td>₹ 12.00</td>
+                <td>5Km</td>
+                <td>₹ 3.00</td> 
+                <td class="statusDriver">
+                   <ul>
+                      <li class="download-text"><a ><i class="material-icons">edit</i>  </a></li>
+                   </ul>
+                </td>
+             </tr>
+
+
+
+
+
+
+            
+          </tbody>
+       </table>
+    </div>
+    <div class="pagination pagination-driver">
+       <ul class="right">
+          <li><a><<</a></li>
+          <li><a>1</a></li>
+          <li><a>2</a></li>
+          <li><a>3</a></li>
+          <li><a>...</a></li>
+          <li><a>10</a></li>
+          <li><a>>></a></li>
+       </ul>
+    </div>
+  </mat-card>
+  <mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

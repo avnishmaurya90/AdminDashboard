@@ -1,0 +1,95 @@
+<mat-card class="mt-2 ml-2 mr-2 mb-2">
+  <div class="marginRight">
+    <mat-icon class="clickable" (click)="goToFareCreate()">add_circle</mat-icon>
+  </div>
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="fares">
+      <ng-container matColumnDef="position">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let driver; let i = index;">
+          <span class="mobile-label">No.</span> {{i+1}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">City</span> {{fare.city.name | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="vendor">
+        <mat-header-cell *matHeaderCellDef>Vendor </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">Vendor </span> {{fare.vendor.name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Order Type </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">Order Type</span> {{fare.type | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="basePrice">
+        <mat-header-cell *matHeaderCellDef> Base Price </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label"> Base Price </span>
+          {{fare.basePrice ? fare.basePrice + ' RS' : 'NA'}}
+        </mat-cell>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="bonusLimit">
+        <mat-header-cell *matHeaderCellDef> Bonus Limit </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">Bonus Limit</span> {{fare.bonusLimit || 'NA'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="bonusPrice">
+        <mat-header-cell *matHeaderCellDef>Bonus Price </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">Bonus Price</span>
+          {{fare.bonusPrice? fare.bonusPrice + ' RS' : 'NA'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="baseDistance">
+        <mat-header-cell *matHeaderCellDef> Base Distance </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label">Base Distance</span>
+          {{ fare && fare.baseDistance ? fare.baseDistance + ' KM' : 'NA'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="perKilometerFare">
+        <mat-header-cell *matHeaderCellDef> Fare/KM </mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label"> Fare/KM </span>
+          {{ fare && fare.perKilometerFare ? fare.perKilometerFare + ' RS' : 'NA'}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+        <mat-cell *matCellDef="let fare">
+          <span class="mobile-label"> Edit</span>
+          <mat-icon class="clickable"><a [routerLink]="['/fares', fare.id]">edit</a></mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>>
+
+    </mat-table>
+    <div *ngIf="fares && !fares.length" class="text-center">No records found</div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+
+  </div>
+
+</mat-card>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

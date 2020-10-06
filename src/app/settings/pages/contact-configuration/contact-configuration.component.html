@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label>Web Site URL</label>
+          <input type="text" formControlName="webSite" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" />
+          <div *ngIf="submitted && f.webSite.errors" class="invalid-feedback">
+            <div *ngIf="f.webSite.errors.required">Web site URL is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Sales Team Email</label>
+          <input type="text" formControlName="salesEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.salesEmail.errors }" />
+          <div *ngIf="submitted && f.salesEmail.errors" class="invalid-feedback">
+            <div *ngIf="f.salesEmail.errors.required">Sales team email is required</div>
+            <div *ngIf="f.salesEmail.errors.email">Sales team email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Info Team Email</label>
+          <input type="text" formControlName="infoEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.infoEmail.errors }" />
+          <div *ngIf="submitted && f.infoEmail.errors" class="invalid-feedback">
+            <div *ngIf="f.infoEmail.errors.required">Info is required</div>
+            <div *ngIf="f.infoEmail.errors.email">Info team email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label>Invoice Team Email</label>
+          <input type="text" formControlName="invoiceEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoiceEmail.errors }" />
+          <div *ngIf="submitted && f.invoiceEmail.errors" class="invalid-feedback">
+            <div *ngIf="f.invoiceEmail.errors.required">Invoice team email is required</div>
+            <div *ngIf="f.invoiceEmail.errors.email">Invoice team email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Support Contact Number</label>
+          <input type="helpline" formControlName="helpline" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.helpline.errors }" />
+          <div *ngIf="submitted && f.helpline.errors" class="invalid-feedback">
+            <div *ngIf="f.helpline.errors.required">Support contact number is required</div>
+            <div *ngIf="f.helpline.errors.minlength">Support contact number must be at least 10 characters</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <button mat-raised-button color="primary" [disabled]="isLoading">Submit</button>
+    </div>
+  </form>
+</div>
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

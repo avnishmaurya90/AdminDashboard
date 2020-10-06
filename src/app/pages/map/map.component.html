@@ -1,0 +1,20 @@
+
+<div class="custommapView">
+  <div class="container">
+    <mat-card>
+
+      <agm-map #map [style.height.px]="height" #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="true"
+        [streetViewControl]="true" [disableDefaultUI]="false" [usePanning]="true" (mapClick)="mapClicked($event)">
+        <agm-marker-cluster maxZoom=20 imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+          <agm-marker *ngFor="let post of positions" (markerClick)="clickedMarker(post, i, infoWindow)" [latitude]="post.lat"
+            [longitude]="post.lng" [iconUrl]="post.icon" [opacity]="post.opacity" [markerDraggable]="post.draggable"
+            (dragEnd)="markerDragEnd(m, $event)">
+
+            <agm-info-window #infoWindow>{{markerInfo}}</agm-info-window>
+          </agm-marker>
+        </agm-marker-cluster>
+      </agm-map>
+    </mat-card>
+
+  </div>
+</div>

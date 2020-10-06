@@ -1,0 +1,375 @@
+<!-- <mat-card class="mt-2 ml-2 mr-2 mb-2">
+  <div class="row">
+    <div class="col-sm col-md col-ls col-xl">
+      <mat-form-field class="widthFit">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" placeholder="Email">
+      </mat-form-field>
+    </div>
+    <div class="col-sm col-md col-ls col-xl">
+      <mat-form-field class="widthFit">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="date" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm col-md col-ls col-xl">
+      <mat-form-field class="widthFit">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="mobile" placeholder="Phone">
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm col-md col-ls col-xl">
+      <mat-form-field class="widthFit">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" placeholder="Name">
+      </mat-form-field>
+    </div>
+
+    <div class="text-right marginRight">
+      <button mat-flat-button (click)="usersList()"> Apply </button>&nbsp;&nbsp;
+      <button mat-flat-button (click)="reset()"> Reset </button>
+    </div>
+  </div>
+</mat-card>
+<div class="text-right mr-2">
+  <button mat-raised-button color="warning" (click)="downloadCsv()">Export CSV</button>
+</div>
+
+<mat-card class="mt-2 ml-2 mr-2 mb-2">
+  <div class="example-container mat-elevation-z8">
+    <mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>
+    <mat-table #table [dataSource]="users">
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell class="customWidthClass" *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell class="customWidthClass" *matCellDef="let user; let i = index;">
+          <span class="mobile-label">No.</span> {{i+1}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span class="mobile-label">Name</span> {{user.firstName | uppercase}} {{user.lastName | uppercase}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span class="mobile-label">Email</span> {{user.email}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mobile">
+        <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span class="mobile-label">Phone</span> {{user.mobile}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="addedDate">
+        <mat-header-cell *matHeaderCellDef>Date of SignUp </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span class="mobile-label">Date of SignUp </span> {{user.createdAt | date:'longDate'}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
+
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="total" [pageSizeOptions]="[1, 5, 10, 20]"
+      (page)="handlePage($event)"></mat-paginator>
+  </div>
+</mat-card> -->
+
+<mat-card class="driverList driverInvoice createFarewrap customerPage">
+    <div class="example-container mat-elevation-z8">
+       <div class="driver-title row">
+          <div class="col s12 m4 l4">
+             <h4>Customer (200)</h4>
+          </div>
+          <div class="col s12 m8 l8">
+             <div class="right">
+                <button mat-icon-button   class="left custome-filter createFareBtn"><a  >
+                    <i class="export-icon"></i>Export CSV</a>
+                   </button>
+ 
+                <button mat-icon-button (click)="showFilter=true" class="left custome-filter">
+                    <mat-icon>filter_list</mat-icon>
+                    Filter
+                  </button>
+                <div *ngIf="showFilter" class="dropdown-area farefilter">
+                   <div class="filter-title">
+                      <h5 class="left">Filter</h5>
+                      <i class="material-icons right" (click)="showFilter=false">clear</i>
+                   </div>
+                   <div class="form-content"> 
+                      <mat-form-field>
+                            <label>Id</label>
+                            <input matInput placeholder="Id">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <label>Customer Name</label>
+                            <input matInput placeholder="Id">
+                          </mat-form-field>
+                          <mat-form-field>
+                            <label>Email</label>
+                            <input matInput placeholder="Id">
+                          </mat-form-field>
+                          <mat-form-field>
+                            <label>Phone Number</label>
+                            <input matInput placeholder="Id">
+                          </mat-form-field>
+                          <div class="list-approve  ">
+                            <label>Status</label>
+                            <mat-radio-group >                  
+                              <mat-radio-button value="1">Single Order</mat-radio-button>
+                              <mat-radio-button value="2">Bulk Order</mat-radio-button>
+                            </mat-radio-group>
+                          </div>                    
+                     </div>
+                   <div class="footer-filter">
+                      <div class="example-button-row">
+                         <button mat-raised-button color="primary">Apply Filter</button>
+                         <button mat-button color="primary">Reset All</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <table>
+          <thead>
+             <tr>
+                <th>Order Id</th>
+                <th>Customer Name</th>
+                <th>Email Id</th>
+                <th>Phone Number</th>
+                <th>Added Date</th>
+                <th>Status</th>
+                <th>Action</th>             
+ 
+             </tr>
+          </thead>
+          <tbody>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+             <tr>
+                <td>1</td>
+                <td> Ankit Singh </td>
+                <td>KFC</td>
+                <td>F&B </td>
+                <td>₹ 8.00</td>
+                <td>₹ 18.00</td>
+                <td class="action-td">
+                    <ul>
+                      <li><a (click)="viewDetail(driver, true)"><i class="material-icons blue-edtitext">edit</i></a></li> 
+                      <li><a><i (click)="confirmDialog(driver, 'delete')" class="material-icons delet-text">delete</i></a></li>
+                    </ul>
+                </td>
+             </tr>
+
+
+          </tbody>
+       </table>
+    </div>
+    <div class="pagination pagination-driver">
+       <ul class="right">
+          <li><a><<</a></li>
+          <li><a>1</a></li>
+          <li><a>2</a></li>
+          <li><a>3</a></li>
+          <li><a>...</a></li>
+          <li><a>10</a></li>
+          <li><a>>></a></li>
+       </ul>
+    </div>
+  </mat-card>
+  <mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

@@ -1,0 +1,21 @@
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Base Price</mat-label>
+    <input matInput placeholder="Base Price" [(ngModel)]="eCommerce.basePercentPrice" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Bonus Limit</mat-label>
+    <input matInput placeholder="Bonus Limit" [(ngModel)]="eCommerce.basePercent" type="number">
+  </mat-form-field>
+</div>
+
+<div class="row">
+  <mat-form-field class="widthFit">
+    <mat-label>Bonus Price</mat-label>
+    <input matInput placeholder="Bonus Price" [(ngModel)]="eCommerce.bonusPercentPrice" (ngModelChange)="onNonFandBSelection()"
+      type="number">
+  </mat-form-field>
+</div>

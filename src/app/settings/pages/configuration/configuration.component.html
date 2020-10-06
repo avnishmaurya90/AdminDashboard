@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="Site">
+      <app-site-configuration *ngIf="tabIndex === 0"></app-site-configuration>
+    </mat-tab>
+    <mat-tab label="Contact">
+      <app-contact-configuration *ngIf="tabIndex === 1"> </app-contact-configuration>
+    </mat-tab>
+    <mat-tab label="Location">
+      <app-location-configuration *ngIf="tabIndex === 2"> </app-location-configuration>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
